@@ -5,33 +5,35 @@
   <title>Survey</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <!-- <link rel="stylesheet" href="style.css"> -->
+  <link rel="stylesheet" href="style.css">
   <script src="https://code.jquery.com/jquery.js"></script>
+
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </head>
-<body>
+<body id="surveyBody">
 
     <div class="container">
-        <h1 class="display-3">Survey Questions</h1>
+        <h1 class="display-3" id="surveyHeader">Survey Questions</h1>
         <hr class="my-2">
         <h2 class="display-3">About You</h2>
 
         <form>
           <div class="form-group">
             <label for="formGroupExampleInput">Name (Required)</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+            <input type="text" class="form-control" id="friendName" placeholder="">
           </div> <!-- close Name input -->
 
         <div class="form-group">
             <label for="formGroupExampleInput2">Link to Photo Image (Required)</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
+            <input type="text" class="form-control" id="friendPic" placeholder="">
         </div> <!-- close Photo Link input -->
       </form>
 
         <h3>Question #1</h3>
           <h4>I am interested in finding a long-term relationship.</h4>
-            <select class="custom-select">
+            <select class="custom-select" id="q1value">
               <option selected>Select an Option...</option>
               <option value="1">1 (Strongly Disagree)</option>
               <option value="2">2</option>
@@ -43,7 +45,7 @@
 
         <h3>Question #2</h3>
           <h4>I am interested in finding a partner that does not use tobacco.</h4>
-            <select class="custom-select">
+            <select class="custom-select" id="q2value">
               <option selected>Select an Option...</option>
               <option value="1">1 (Strongly Disagree)</option>
               <option value="2">2</option>
@@ -55,7 +57,7 @@
 
         <h3>Question #3</h3>
           <h4>You enjoy being physically active and spending time outdoors.</h4>
-            <select class="custom-select">
+            <select class="custom-select" id="q3value">
               <option selected>Select an Option...</option>
               <option value="1">1 (Strongly Disagree)</option>
               <option value="2">2</option>
@@ -67,7 +69,7 @@
 
         <h3>Question #4</h3>
           <h4>Your mind often wanders while you are trying to concentrate.</h4>
-            <select class="custom-select">
+            <select class="custom-select" id="q4value">
               <option selected>Select an Option...</option>
               <option value="1">1 (Strongly Disagree)</option>
               <option value="2">2</option>
@@ -79,8 +81,8 @@
 
 
         <h3>Question #5</h3>
-          <h4></h4>
-            <select class="custom-select">
+          <h4>I make friends easily.</h4>
+            <select class="custom-select" id="q5value">
               <option selected>Select an Option...</option>
               <option value="1">1 (Strongly Disagree)</option>
               <option value="2">2</option>
@@ -93,7 +95,7 @@
 
         <h3>Question #6</h3>
           <h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
-            <select class="custom-select">
+            <select class="custom-select" id="q6value">
               <option selected>Select an Option...</option>
               <option value="1">1 (Strongly Disagree)</option>
               <option value="2">2</option>
@@ -105,7 +107,7 @@
 
         <h3>Question #7</h3>
           <h4>In a discussion, truth should be more important than people’s sensitivities.</h4>
-            <select class="custom-select">
+            <select class="custom-select" id="q7value">
               <option selected>Select an Option...</option>
               <option value="1">1 (Strongly Disagree)</option>
               <option value="2">2</option>
@@ -117,7 +119,7 @@
 
         <h3>Question #8</h3>
           <h4>You are inclined to stay in the background during social occaisions.</h4>
-            <select class="custom-select">
+            <select class="custom-select" id="q8value">
               <option selected>Select an Option...</option>
               <option value="1">1 (Strongly Disagree)</option>
               <option value="2">2</option>
@@ -129,7 +131,7 @@
 
         <h3>Question #9</h3>
           <h4>You are frequently "lost in thought" when you should be taking part in a conversation.</h4>
-            <select class="custom-select">
+            <select class="custom-select" id="q9value">
               <option selected>Select an Option...</option>
               <option value="1">1 (Strongly Disagree)</option>
               <option value="2">2</option>
@@ -141,7 +143,7 @@
 
         <h3>Question #10</h3>
           <h4>You like to play pranks on other people.</h4>
-            <select class="custom-select">
+            <select class="custom-select" id="q10value">
               <option selected>Select an Option...</option>
               <option value="1">1 (Strongly Disagree)</option>
               <option value="2">2</option>
@@ -162,5 +164,6 @@
         </footer>
     </div> <!-- closing main container-->
 
+  <script src="../data/friends.js"></script>
 </body>
 </html>

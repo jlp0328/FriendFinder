@@ -1,4 +1,4 @@
-body{
+#homepageBody{
   text-align: center;
   color: white;
   font-family: 'Patua One', cursive;
@@ -12,7 +12,7 @@ body{
 
 .jumbotron p{
   font-size: 30px;
-    font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 .btn-primary{
@@ -21,6 +21,20 @@ body{
   font-size: 20px;
 }
 
-.dropdown-toggle{
+#surveyBody{
+  font-family: 'Nunito Sans', sans-serif;
+}
 
+h2, h3{
+  font-weight: bold;
+}
+
+h4{
+  color: #B52894;
+
+}
+
+#surveyHeader{
+  font-weight: bold;
+  color: #B52894;
 }
