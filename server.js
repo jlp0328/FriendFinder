@@ -4,16 +4,17 @@ var path = require("path");
 
 var app = express();
 
-var PORT = 3015;
+var PORT = process.env.PORT || 8080;
 
-
+//trying to get css and images
+app.use(express.static("app/public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 
-// require("./app/routing/apiRoutes")(app);
+require("./app/routing/apiRoutes")(app);
 require("./app/routing/htmlRoutes")(app);
 
 

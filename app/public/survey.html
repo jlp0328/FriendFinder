@@ -5,10 +5,8 @@
   <title>Survey</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://code.jquery.com/jquery.js"></script>
-
-
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </head>
@@ -164,6 +162,133 @@
         </footer>
     </div> <!-- closing main container-->
 
-  <script src="../data/friends.js"></script>
 </body>
 </html>
+
+<script type="text/javascript">
+
+var newFriendScores;
+var add = [];
+var allScores = [];
+var counter = 0;
+
+$("#submit").on("click", function(){
+    event.preventDefault();
+
+      var scores = [];
+
+      var newFriend = {
+      name: $("#friendName").val().trim(),
+      link: $("#friendPic").val().trim(),
+      responses: scores
+    };
+
+      var questionOne = parseInt($("#q1value").val());
+      var questionTwo = parseInt($("#q2value").val());
+      var questionThree = parseInt($("#q3value").val());
+      var questionFour = parseInt($("#q4value").val());
+      var questionFive = parseInt($("#q5value").val());
+      var questionSix = parseInt($("#q6value").val());
+      var questionSeven = parseInt($("#q7value").val());
+      var questionEight = parseInt($("#q8value").val());
+      var questionNine  = parseInt($("#q9value").val());
+      var questionTen = parseInt($("#q10value").val());
+
+
+      scores.push(questionOne);
+      scores.push(questionTwo);
+      scores.push(questionThree);
+      scores.push(questionFour);
+      scores.push(questionFive);
+      scores.push(questionSix);
+      scores.push(questionSeven);
+      scores.push(questionEight);
+      scores.push(questionNine);
+      scores.push(questionTen);
+
+      console.log(newFriend);
+
+    newFriendScores = newFriend.responses;
+    console.log(newFriendScores)
+
+    $.post("/api/friends", newFriend, function(data) {
+
+
+    });
+
+    getFriends();
+
+
+});
+
+function getFriends(){
+
+   var currentURL = window.location.origin;
+
+   $.ajax({ url: currentURL + "/api/friends", method: "GET" })
+  .done(function(friendsArray) {
+
+        console.log("------------------------------------");
+        console.log("URL: " + currentURL + "/api/friends");
+        console.log("------------------------------------");
+
+        console.log(friendsArray);
+        console.log("------------------------------------");
+
+         console.log(newFriendScores);
+
+      for(var i = 0; i < friendsArray.length; i++){
+              var responses = friendsArray[i].responses;
+              allScores.push(responses);
+            }
+      console.log(allScores);
+
+      for(var j = 0; j < friendsArray.length; j++ ){
+          add = [];
+          sum = 0;
+
+          var currentFriend = allScores[j]
+
+          for(var i = 0; i < 10; i++){
+
+             var newFriendIndex = newFriendScores[i];
+              var currentFriendIndex = currentFriend[i];
+              var difference = newFriendIndex - currentFriendIndex;
+              add.push(Math.abs(difference));
+
+                    for (var k = 0; k < add.length; k++){
+                      sum += add[i];
+
+                    }
+              }
+
+              console.log(sum);
+              // console.log(add);
+            }
+
+
+
+
+    // max = Math.max.apply(null,array)
+    // console.log(max);
+
+    });
+
+
+}
+
+// Compare newFriendScores to all scores in the friendsArray
+
+// newFriendScores[0] - friendsArray[i].responses[0]
+
+// a = new friend
+// b = index 0
+// c = index 1
+// d = inex 2
+
+// a1 - b1, a2-b2, a1-d1
+
+
+
+
+</script>
