@@ -171,6 +171,7 @@ var newFriendScores;
 var add = [];
 var allScores = [];
 var counter = 0;
+var sumArray = [];
 
 $("#submit").on("click", function(){
     event.preventDefault();
@@ -243,26 +244,29 @@ function getFriends(){
             }
       console.log(allScores);
 
-      for(var j = 0; j < friendsArray.length; j++ ){
-          add = [];
-          sum = 0;
+          for(var j = 0; j < friendsArray.length; j++ ){
+              add = [];
+              sum = 0;
 
-          var currentFriend = allScores[j]
+              var currentFriend = allScores[j]
 
-          for(var i = 0; i < 10; i++){
+                  for(var i = 0; i < 10; i++){
 
-             var newFriendIndex = newFriendScores[i];
-              var currentFriendIndex = currentFriend[i];
-              var difference = newFriendIndex - currentFriendIndex;
-              add.push(Math.abs(difference));
+                     var newFriendIndex = newFriendScores[i];
+                      var currentFriendIndex = currentFriend[i];
+                      var difference = newFriendIndex - currentFriendIndex;
+                      add.push(Math.abs(difference));
 
-                    for (var k = 0; k < add.length; k++){
-                      sum += add[i];
+                            for (var k = 0; k < add.length; k++){
+                                sum += add[i];
+                            }
+
 
                     }
-              }
-
+              sumArray.push(sum);
               console.log(sum);
+              console.log(sumArray);
+
               // console.log(add);
             }
 
