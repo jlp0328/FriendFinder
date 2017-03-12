@@ -38,3 +38,15 @@ h4{
   font-weight: bold;
   color: #B52894;
 }
+
+#friendModal{
+  color: #B52894;
+  font-family: 'Nunito Sans', sans-serif;
+  text-align: center;
+}
+
+
+#img{
+  max-height: 250px;
+  max-width: 250px;
+}

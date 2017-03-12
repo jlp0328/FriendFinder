@@ -151,10 +151,33 @@
             </select>
         <hr>
 
-        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit" data-toggle="modal" data-target="#friendModal"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
         Submit</button>
         <br>
         <br>
+              <div class="modal fade" id="friendModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h2 class="modal-title" id="exampleModalLabel">Meet Your New Best Friend!</h2>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+
+                    <h3 id="trueFriendName"></h3>
+
+                    <img id="img" src="">
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal"><a href="/survey">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
         <footer>
               <div class="container">
               <p><a href="">API Friends List</a> | <a href="">GitHub Repo</a></p>
@@ -167,6 +190,8 @@
 
 <script type="text/javascript">
 
+var newFriend;
+var scores;
 var newFriendScores;
 var add = [];
 var allScores = [];
@@ -176,9 +201,9 @@ var sumArray = [];
 $("#submit").on("click", function(){
     event.preventDefault();
 
-      var scores = [];
+      scores = [];
 
-      var newFriend = {
+      newFriend = {
       name: $("#friendName").val().trim(),
       link: $("#friendPic").val().trim(),
       responses: scores
@@ -212,13 +237,25 @@ $("#submit").on("click", function(){
     newFriendScores = newFriend.responses;
     console.log(newFriendScores)
 
-    $.post("/api/friends", newFriend, function(data) {
-
-
-    });
 
     getFriends();
 
+
+
+});
+
+$("#closeModal").on("click", function(){
+
+  $("#friendName").val("");
+  $("#friendPic").val("");
+  $(".custom-select").val("Select an Option...");
+
+   add = [];
+   sum = 0;
+   startingSum = 100;
+   allScores =[];
+
+   $.post("/api/friends", newFriend, function(data) {});
 
 });
 
@@ -227,7 +264,7 @@ function getFriends(){
    var currentURL = window.location.origin;
 
    $.ajax({ url: currentURL + "/api/friends", method: "GET" })
-  .done(function(friendsArray) {
+      .done(function(friendsArray) {
 
         console.log("------------------------------------");
         console.log("URL: " + currentURL + "/api/friends");
@@ -238,59 +275,62 @@ function getFriends(){
 
          console.log(newFriendScores);
 
-      for(var i = 0; i < friendsArray.length; i++){
-              var responses = friendsArray[i].responses;
-              allScores.push(responses);
-            }
-      console.log(allScores);
-
-          for(var j = 0; j < friendsArray.length; j++ ){
+//Loop through the allScores array to get the score from each index of the array
+      for(var j = 0; j < friendsArray.length; j++ ){
               add = [];
               sum = 0;
+              startingSum = 100;
+
+              var responses = friendsArray[j].responses;
+              allScores.push(responses);
+
+              console.log(allScores);
 
               var currentFriend = allScores[j]
 
-                  for(var i = 0; i < 10; i++){
+//Compare the index of the newly entered friend's scores with those of the prepopulated friends to determine the difference.
+              for(var i = 0; i < 10; i++){
 
                      var newFriendIndex = newFriendScores[i];
                       var currentFriendIndex = currentFriend[i];
-                      var difference = newFriendIndex - currentFriendIndex;
-                      add.push(Math.abs(difference));
-
-                            for (var k = 0; k < add.length; k++){
-                                sum += add[i];
-                            }
+                      var difference = Math.abs(newFriendIndex - currentFriendIndex);
+                      add.push(difference);
 
 
                     }
-              sumArray.push(sum);
+                    //Closing brack for i loop
+
+//Add all of the differences (new user - prepopualted users) to determine who is the closest match to the new user
+              sum = add.reduce(function(a,b){
+                  return a + b;
+              }, 0);
+
               console.log(sum);
-              console.log(sumArray);
 
-              // console.log(add);
+              if(sum < startingSum){
+                startingSum = sum;
+
+                trueFriend = {
+                  friendName: friendsArray[j].name,
+                  friendPhoto: friendsArray[j].link
+                };
+
+
+              }
+
+
             }
+            //Closing bracket for j loop
 
+            $("#trueFriendName").text(trueFriend.friendName);
 
-
-
-    // max = Math.max.apply(null,array)
-    // console.log(max);
+            var friendpic = trueFriend.friendPhoto;
+            $("#img").attr("src", friendpic);
+            console.log(trueFriend);
 
     });
 
-
 }
-
-// Compare newFriendScores to all scores in the friendsArray
-
-// newFriendScores[0] - friendsArray[i].responses[0]
-
-// a = new friend
-// b = index 0
-// c = index 1
-// d = inex 2
-
-// a1 - b1, a2-b2, a1-d1
 
 
 
