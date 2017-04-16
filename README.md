@@ -8,7 +8,11 @@ Looking for a new friend? Use the Friend Finder to find new friends based on you
 
 ## Technologies Used:
 
-
+HTML
+CSS/Bootstrap
+Javascript
+Node 
+Express
 
 ## Heroku Link:
 
